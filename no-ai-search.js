@@ -1,3 +1,15 @@
-var baseURL = window.location.href
+const pattern = "https://www.google.com/search*";
 
-window.location.replace(baseURL + "&udm=14")
+function redirect(requestDetails) {
+    let url = new URL(requestDetails.url);
+    if (!url.searchParams.has('udm')) {
+        url.searchParams.append('udm', '14');
+        return {redirectUrl: url.toString()};
+    }
+}
+
+browser.webRequest.onBeforeRequest.addListener(
+    redirect,
+    { urls: [pattern] },
+    ["blocking"]
+);
