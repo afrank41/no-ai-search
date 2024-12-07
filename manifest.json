@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "no-ai-search",
+    "version": "1.0",
+    "description": "Appends '&udm=14' to end of Google search URLs",
+    "icons": {
+        "48": "icons/no-ai-48.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.google.com/search?*"
+            ],
+            "js": [
+                "no-ai-search.js"
+            ]
+        }
+    ]
+}
