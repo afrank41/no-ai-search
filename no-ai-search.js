@@ -1,10 +1,17 @@
 const pattern = "https://www.google.com/search*";
 
 function redirect(requestDetails) {
-    let url = new URL(requestDetails.url);
-    if (!url.searchParams.has('udm')) {
-        url.searchParams.append('udm', '14');
-        return {redirectUrl: url.toString()};
+    let baseUrl = new URL(requestDetails.url);
+
+    // Append udm=14 and redirect
+    if (!baseUrl.searchParams.has('udm')) {
+        baseUrl.searchParams.append('udm', '14');
+        let newUrl = baseUrl.toString();
+
+        // Delete initial search URL from browser history
+        browser.history.deleteUrl({ url: requestDetails.url });
+
+        return { redirectUrl: newUrl };
     }
 }
 

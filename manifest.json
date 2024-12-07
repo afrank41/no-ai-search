@@ -9,6 +9,7 @@
     "permissions": [
         "webRequest",
         "webRequestBlocking",
+        "history",
         "*://www.google.com/*"
     ],
     "background": {
